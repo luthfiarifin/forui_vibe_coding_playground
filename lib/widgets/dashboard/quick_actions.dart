@@ -149,7 +149,7 @@ class QuickActions extends StatelessWidget {
       alignment: FToastAlignment.bottomLeft,
       duration: const Duration(seconds: 3),
       icon: const Icon(Icons.check_circle_outline),
-      title: Text('$actionName'),
+      title: Text(actionName),
       description: const Text('Demo mode - Action logged successfully'),
     );
   }

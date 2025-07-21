@@ -1,0 +1,166 @@
+import {Callout} from "nextra/components";
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Tile
+
+A specialized [Item](/docs/data/item) for touch devices, typically used to group related information together.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+    Tiles can be grouped together inside a [FTileGroup](/docs/tile/tile-group).
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTile(
+      prefix: Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: Icon(FIcons.chevronRight),
+      onPress: () { },
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create tile 
+```
+
+## Usage
+
+### `FTile(...)`
+
+```dart copy
+FTile(
+  style: FTileStyle(...),
+  prefix: Icon(FIcons.user),
+  title: const Text('Title'),
+  subtitle: const Text('Subtitle'),
+  details: const Text('Details'),
+  suffix: Icon(FIcons.chevronRight),
+  semanticsLabel: 'Label',
+  enabled: true,
+  selected: false,
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+);
+```
+
+### `FTile.raw(...)`
+
+```dart copy
+FTile.raw(
+  style: FTileStyle(...),
+  prefix: Icon(FIcons.user),
+  child: const Text('Title'),
+  semanticsLabel: 'Label',
+  enabled: true,
+  selected: false,
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
+);
+```
+
+## Examples
+
+### Untappable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{tappable: false}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTile(
+      prefix: Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: Icon(FIcons.chevronRight),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{enabled: false}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2} copy
+    FTile(
+      enabled: false,
+      prefix: Icon(FIcons.user),
+      title: const Text('Personalization'),
+      suffix: Icon(FIcons.chevronRight),
+      onPress: () { },
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### With Subtitle
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='subtitle' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    FTile(
+      prefix: Icon(FIcons.bell),
+      title: const Text('Notifications'),
+      subtitle: const Text('Banners, Sounds, Badges'),
+      suffix: Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### With Details
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='details' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    FTile(
+      prefix: Icon(FIcons.wifi),
+      title: const Text('WiFi'),
+      details: const Text('Forus Labs (5G)'),
+      suffix: Icon(FIcons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>

@@ -1,0 +1,123 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Badge
+
+A badge draws attention to specific information, such as labels and counts. Use badges to display status, notifications, or small pieces of information that need to stand out.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/"/>
+    <LinkBadge label="Source Code" href="https://github.com/forus-labs/forui/blob/main/lib/src/widgets/badge/badge.dart"/>
+</LinkBadgeGroup>
+
+## Overview
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart copy
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBadge(child: const Text('New')),
+          const SizedBox(width: 8),
+          FBadge(
+            style: FBadgeStyle.secondary(),
+            child: const Text('3'),
+          ),
+        ],
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create badges 
+```
+
+## Usage
+
+### `FBadge(...)`
+
+```dart copy
+FBadge(
+  style: FBadgeStyle.primary(),
+  child: const Text('Badge'),
+);
+```
+
+### `FBadge.raw(...)`
+
+```dart copy
+FBadge.raw(
+  style: FBadgeStyle.primary(),
+  builder: (context, style) => Text('Badge'),
+);
+```
+
+## Examples
+
+### Primary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart copy
+      FBadge(label: const Text('Badge'));
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Secondary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{style: 'secondary'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.secondary(),
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Outline
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{style: 'outline'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.outline(),
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Destructive
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{style: 'destructive'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.destructive(),
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>

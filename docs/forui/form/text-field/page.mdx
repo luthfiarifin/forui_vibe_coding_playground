@@ -1,0 +1,214 @@
+import { Callout } from "nextra/components";
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Text Field
+
+A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+  See [`FTextFormField`](/docs/form/text-form-field) for using text fields in forms.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class DefaultTextField extends StatefulWidget {
+      const DefaultTextField({super.key});
+
+      @override
+      State<DefaultTextField> createState() => _DefaultTextFieldState();
+    }
+
+    class _DefaultTextFieldState extends State<DefaultTextField> {
+      final TextEditingController _controller = TextEditingController();
+
+      @override
+      void initState() {
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) => FTextField(
+        controller: _controller,
+        label: const Text('Username'),
+        hint: 'JaneDoe',
+        description: const Text('Please enter your username.'),
+        maxLines: 1,
+      );
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create text-field 
+```
+
+## Usage
+
+### `FTextField(...)`
+
+```dart copy
+FTextField(
+  controller: _controller, // TextEditingController
+  style: FTextFieldStyle(...),
+  clearable: (value) => value.text.isNotEmpty,
+  enabled: true,
+  label: const Text('Email'),
+  hint: 'john@doe.com',
+  description: const Text('Enter your email associated with your Forui account.'),
+  error: const Text('Error'),
+  keyboardType: TextInputType.emailAddress,
+  textCapitalization: TextCapitalization.none,
+  maxLines: 1,
+);
+```
+
+## Examples
+
+### States
+
+#### Enabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField(
+      controller: _controller, // TextEditingController
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      maxLines: 1,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {7} copy
+    FTextField(
+      controller: _controller, // TextEditingController
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      maxLines: 1,
+      enabled: false,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Clearable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='clearable' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class ClearableTextField extends StatefulWidget {
+      @override
+      State<ClearableTextField> createState() => ClearableTextFieldState();
+    }
+
+    class ClearableTextFieldState extends State<ClearableTextField> {
+      late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+
+      @override
+      Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: FTextField(
+          controller: _controller,
+          label: const Text('Username'),
+          hint: 'JaneDoe',
+          description: const Text('Please enter your username.'),
+          maxLines: 1,
+          clearable: (value) => value.text.isNotEmpty,
+        ),
+      );
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Presets
+
+#### Email
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='email' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.email(
+      initialValue: 'jane@doe.com',
+      controller: _controller, // TextEditingController
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Password
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='password' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.password(
+      controller: _controller, // TextEditingController
+      obscuringCharacter: '*',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Multiline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='multiline' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.multiline(
+      controller: _controller, // TextEditingController
+      label: const Text('Leave a review'),
+      maxLines: 4,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>

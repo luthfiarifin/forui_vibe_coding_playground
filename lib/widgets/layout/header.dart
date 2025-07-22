@@ -11,15 +11,6 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(
-        color: Color(0xFF1E293B), // Container color from PRD
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFF38BDF8), // Accent color from PRD
-            width: 0.5,
-          ),
-        ),
-      ),
       child: Row(
         children: [
           // App icon and title

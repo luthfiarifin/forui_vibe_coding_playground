@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'screens/dashboard_screen.dart';
+
+import 'widgets/layout/responsive_scaffold.dart';
 
 void main() {
   runApp(const SmartCityEnergyApp());
@@ -20,7 +21,7 @@ class SmartCityEnergyApp extends StatelessWidget {
       localizationsDelegates: const [...FLocalizations.localizationsDelegates],
       builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
-      home: const DashboardScreen(),
+      home: const ResponsiveScaffold(),
     );
   }
 }

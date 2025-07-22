@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import '../../controllers/navigation_controller.dart';
+import '../../utils/responsive_utils.dart';
 
-/// Header component for the Smart City Energy Tracker dashboard
-/// Contains the app title and key navigation elements
-/// Uses ForUI components for consistent styling
+/// Enhanced header component for the Smart City Energy Tracker dashboard
+/// Contains the app title, sidebar toggle for tablet/desktop, and responsive features
+/// Uses ForUI components for consistent styling with responsive behavior
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final NavigationController? navigationController;
+  final bool showBreadcrumb;
+
+  const Header({
+    super.key,
+    this.navigationController,
+    this.showBreadcrumb = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
+    return FHeader(
+      title: Row(
         children: [
+          // Sidebar toggle button for tablet/desktop
+          if (ResponsiveUtils.shouldShowSidebar(context) &&
+              navigationController != null)
+            _buildSidebarToggle(context),
+
           // App icon and title
           const Icon(
             Icons.energy_savings_leaf,
@@ -31,45 +44,42 @@ class Header extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Text(
-                  'Real-time Grid Monitoring Dashboard',
-                  style: context.theme.typography.sm,
-                ),
-              ],
-            ),
-          ),
-          // TODO: Implement responsive navigation menu for tablet/desktop
-          // Status indicator
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.green..withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green, width: 1),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  'Online',
-                  style: context.theme.typography.xs.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text(_getSubtitle(context), style: context.theme.typography.sm),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  /// Build sidebar toggle button for tablet/desktop
+  Widget _buildSidebarToggle(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: ListenableBuilder(
+        listenable: navigationController!,
+        builder: (context, child) {
+          return IconButton(
+            icon: Icon(
+              navigationController!.sidebarExpanded ? FIcons.x : FIcons.menu,
+              color: context.theme.colors.foreground,
+            ),
+            onPressed: () => navigationController!.toggleSidebar(),
+          );
+        },
+      ),
+    );
+  }
+
+  /// Get responsive subtitle text
+  String _getSubtitle(BuildContext context) {
+    if (ResponsiveUtils.isMobile(context)) {
+      return 'Grid Dashboard';
+    } else if (ResponsiveUtils.isTablet(context)) {
+      return 'Real-time Grid Monitoring';
+    } else {
+      return 'Real-time Grid Monitoring Dashboard';
+    }
   }
 }

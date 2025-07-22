@@ -45,10 +45,10 @@ class StatCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: context.theme.typography.sm.copyWith(
+                    style: context.theme.typography.xs.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -59,7 +59,7 @@ class StatCard extends StatelessWidget {
             // Value
             Text(
               value,
-              style: context.theme.typography.xl2.copyWith(
+              style: context.theme.typography.xl.copyWith(
                 color: valueColor,
                 fontWeight: FontWeight.w700,
               ),

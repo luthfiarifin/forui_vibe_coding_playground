@@ -31,12 +31,12 @@ class KpiGrid extends StatelessWidget {
             // Mobile: 2 columns (current)
             // Tablet: 4 columns
             // Desktop: 4 columns in a single row
-            final crossAxisCount = constraints.maxWidth >= 768 ? 4 : 2;
+            final crossAxisCount = constraints.maxWidth > 580 ? 4 : 2;
 
             // Dynamic aspect ratio using formula based on available width
-            // Formula: starts at 1.0 for small screens, gradually increases to 1.5 for large screens
-            final childAspectRatio = (1.0 + (constraints.maxWidth / 4000))
-                .clamp(1.0, 1.5);
+            // Formula: starts at 0.5 for small screens, gradually increases to 1.5 for large screens
+            final childAspectRatio = (0.5 + (constraints.maxWidth / 3000))
+                .clamp(0.5, 1.5);
 
             return GridView.count(
               shrinkWrap: true,
